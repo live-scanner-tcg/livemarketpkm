@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Admin | Live Market</title>
+    <style>
+        :root { --red: #EE1515; --blue: #3B4CCA; --dark: #333; }
+        body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; margin: 0; padding: 20px; }
+        .container { max-width: 500px; margin: 0 auto; background: white; padding: 25px; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h2 { color: var(--red); text-align: center; margin-bottom: 20px; }
+        
+        .section { margin-bottom: 20px; padding: 15px; border: 1px solid #eee; border-radius: 10px; }
+        label { display: block; font-size: 12px; font-weight: bold; color: #666; margin-bottom: 5px; }
+        
+        input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        input:focus { border-color: var(--blue); outline: none; }
+
+        button { width: 100%; padding: 15px; background: var(--red); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; font-size: 16px; }
+        button:hover { background: var(--blue); }
+        
+        #statusCarregamento { text-align: center; display: block; font-size: 12px; margin-bottom: 10px; color: #888; }
+        .success-msg { color: #2ecc71; text-align: center; font-weight: bold; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Painel de Captura</h2>
+    
+    <span id="statusCarregamento">Sincronizando clientes...</span>
+
+    <div class="section">
+        <label>PESQUISAR CLIENTE (NOME OU @)</label>
+        <input type="text" list="listaClientes" id="buscaCliente" placeholder="Digite o nome ou @...">
+        <datalist id="listaClientes"></datalist>
+    </div>
+
+    <div class="section">
+        <label>NOME DA CARTA / ITEM</label>
+        <input type="text" id="nomeCarta" placeholder="Ex: Pikachu VMAX Full Art">
+        
+        <label>VALOR (R$)</label>
+        <input type="number" id="valorCarta" placeholder="0.00" step="0.01">
+    </div>
+
+    <button onclick="salvarCarta()" id="btnSalvar">VINCULAR CARTA AO PERFIL</button>
+    <div id="feedback"></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const SB_URL = 'https://hqmxcqhvwlvyellolhkm.supabase.co'; 
+    const SB_KEY = 'sb_publishable_CvY0uDpQZDPSnQixxh7uSA_8cYwqumF';
+    const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
+
+    let listaLocalPerfis = [];
+
+    // 1. CARREGAR CLIENTES DO BANCO
+    async function sincronizarPerfis() {
+        const datalist = document.getElementById('listaClientes');
+        const statusTxt = document.getElementById('statusCarregamento');
+
+        try {
+            const { data, error } = await supabaseClient
+                .from('perfis')
+                .select('id, nome_completo, rede_social');
+
+            if (error) throw error;
+
+            listaLocalPerfis = data;
+            datalist.innerHTML = "";
+
+            data.forEach(p => {
+                const option = document.createElement('option');
+                // Formato de exibição: Nome Completo (@arroba)
+                const identificador = p.rede_social ? `${p.nome_completo} (${p.rede_social})` : p.nome_completo;
+                option.value = identificador;
+                datalist.appendChild(option);
+            });
+
+            statusTxt.innerText = "✅ " + data.length + " clientes prontos.";
+        } catch (err) {
+            statusTxt.innerText = "❌ Erro ao carregar clientes.";
+            console.error(err);
+        }
+    }
+
+    // 2. ENCONTRAR O ID REAL DO CLIENTE SELECIONADO
+    function obterIdPorIdentificador(texto) {
+        const encontrado = listaLocalPerfis.find(p => {
+            const iden = p.rede_social ? `${p.nome_completo} (${p.rede_social})` : p.nome_completo;
+            return iden === texto;
+        });
+        return encontrado ? encontrado.id : null;
+    }
+
+    // 3. SALVAR NO BANCO VINCULANDO O ID
+    async function salvarCarta() {
+        const btn = document.getElementById('btnSalvar');
+        const feedback = document.getElementById('feedback');
+        const nomeCli = document.getElementById('buscaCliente').value;
+        const nomeCar = document.getElementById('nomeCarta').value;
+        const valorCar = document.getElementById('valorCarta').value;
+
+        // Pegamos o ID UUID do cliente
+        const perfilId = obterIdPorIdentificador(nomeCli);
+
+        if (!perfilId) {
+            alert("Por favor, selecione um cliente da lista!");
+            return;
+        }
+
+        if (!nomeCar || !valorCar) {
+            alert("Preencha o nome e o valor da carta!");
+            return;
+        }
+
+        btn.disabled = true;
+        btn.innerText = "Salvando...";
+
+        try {
+            const { error } = await supabaseClient
+                .from('portfolio_clientes') // Sua tabela de cartas
+                .insert([{
+                    perfil_id: perfilId, // AQUI ESTÁ O VÍNCULO!
+                    nome_carta: nomeCar,
+                    valor: parseFloat(valorCar)
+                }]);
+
+            if (error) throw error;
+
+            feedback.innerHTML = `<p class="success-msg">Carta vinculada a ${nomeCli}!</p>`;
+            
+            // Limpar apenas campos da carta para a próxima captura
+            document.getElementById('nomeCarta').value = "";
+            document.getElementById('valorCarta').value = "";
+            
+            setTimeout(() => { feedback.innerHTML = ""; }, 3000);
+
+        } catch (err) {
+            alert("Erro ao salvar: " + err.message);
+        } finally {
+            btn.disabled = false;
+            btn.innerText = "VINCULAR CARTA AO PERFIL";
+        }
+    }
+
+    // Iniciar carregamento
+    window.onload = sincronizarPerfis;
+</script>
+
+</body>
+</html>

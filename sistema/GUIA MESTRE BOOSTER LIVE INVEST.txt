@@ -1,0 +1,65 @@
+GUIA MESTRE: BOOSTER LIVE INVEST
+1. O CONCEITO (MARKETING AGRESSIVO)
+Slogan: "A sua conexão direta com o mercado bilionário do Japão."
+
+Promessa: "Custódia Profissional a preço de custo. Invista no Japão, lucre no Brasil."
+
+2. MODALIDADES DE INVESTIMENTO
+Drops VIP e Pré-Venda: Garanta os lotes antes de todo mundo. O sistema trava a sua compra e garante o seu lugar na fila da Live.
+
+Fila de Elite: Prioridade total para quem é membro, com limites de compra exclusivos para evitar que os grandes estoques acabem rápido.
+
+3. SISTEMA DE CUSTÓDIA (O FATOR "CUSTO ZERO")
+Em vez de focar no valor, focamos na liberdade:
+
+Plano Semestral: "Custódia Simbólica" – Menos que o valor de um café por mês para garantir segurança total no Japão.
+
+Plano Anual: "O Melhor Custo-Benefício do Mercado" – Garanta um ano inteiro de proteção e valorização por um valor desprezível.
+
+Bloqueio de Saída: O ativo só sai ou é negociado com a manutenção em dia. É a garantia de que o Marketplace terá cartas reais e seguras.
+
+4. DASHBOARD "LIVE-SYNC" (A MÁGICA AO VIVO)
+Inventário Instantâneo: O Streamer cadastra o Hit no segundo em que ele sai do booster.
+
+Cofre Digital: O cliente vê o saldo de ativos subir na tela em tempo real.
+
+Cine-Gaveta: Vídeos de auditoria que provam: sua carta está protegida em solo japonês.
+
+5. MARKETPLACE DE ALTA LIQUIDEZ
+Taxas de Corretagem: As menores do mercado para quem é membro VIP.
+
+Transação Invisível: Venda sua carta para outro investidor sem que ela saia do Japão. Dinheiro no bolso, carta no cofre.
+
+🛠️ PROMPT TÉCNICO PARA O GOOGLE STITCH (CHAMATIVO)
+"Desenvolva a plataforma 'Booster Live Invest' focada em conversão e urgência:
+
+PAINEL DO STREAMER (ULTRA-FAST): Interface para registro de Hits com um clique durante a live. O inventário do usuário deve atualizar via Websocket em tempo real.
+
+SISTEMA DE CUSTÓDIA: Implementar planos de 180 e 365 dias com títulos chamativos como 'Plano Investidor' e 'Plano Colecionador Elite'. O sistema deve enfatizar que o custo é irrisório perante a segurança.
+
+MARKETPLACE C2C: Motor de vendas em R$ com taxas reduzidas. Bloquear compras de usuários sem plano de custódia ativo (exigir ativação no checkout).
+
+GATILHOS DE ESCASSEZ: Exibir nos cards de booster: 'Apenas X unidades restantes para a Live de hoje!'.
+
+AUDITORIA JAPÃO: Módulo de vídeo 'Cine-Gaveta' para cada usuário, vinculando o ativo físico ao registro digital instantâneo."
+
+🚀 Sugestão de Bio/Anúncio com "Copy" Matadora:
+"PARE DE PAGAR FRETE CARO! 🛑✈️
+
+Com a Booster Live Invest, você compra seus boosters direto do Japão e o seu Hit cai na sua conta AO VIVO, na hora!
+
+✅ Custódia a preço de custo: Mantenha suas cartas no Japão por menos do que você gasta em um lanche. ✅ Marketplace Integrado: Valorizou? Venda sem pagar frete e receba em Real. ✅ Segurança Máxima: Suas cartas guardadas no Japão, com vídeo de auditoria na sua mão.
+
+Sua carteira Pokémon começa aqui. Garanta seu drop na próxima Live! 👇"
+
+🎌 Por que isso é mais chamativo?
+"Preço de custo" / "Simbólico": Soa muito melhor do que dar um valor exato logo de cara. Cria a curiosidade para entrar no site.
+
+"Ao vivo / Na hora": Foca na velocidade. O brasileiro odeia esperar.
+
+"Sem pagar frete": Esse é o maior ponto de dor do colecionador que compra de fora.
+
+https://lh3.googleusercontent.com/u/0/d/1bQCjVoX37PbrrZbqgHJqL0eb3z1qvVOl
+
+
+vamos retirar a parte "A Autoridade por trás do Cofre", na pare do header vamos criar um seta para baixo de uma pokebola direcionando para um box explicando cade item.

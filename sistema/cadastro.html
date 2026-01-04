@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro | Live Market ? TIktok live</title>
+    <style>
+        :root { --red: #EE1515; --blue: #3B4CCA; --bg: #f4f4f4; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; }
+        .card { background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 100%; max-width: 350px; border-top: 6px solid var(--red); }
+        .logo { text-align: center; font-weight: 900; margin-bottom: 15px; font-size: 22px; }
+        .logo span { color: var(--red); }
+        h3 { text-align: center; margin-top: 0; color: #333; font-size: 16px; text-transform: uppercase; }
+        input { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ddd; border-radius: 8px; box-sizing: border-box; font-size: 16px; }
+        button { width: 100%; padding: 14px; background: var(--red); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; text-transform: uppercase; margin-top: 10px; }
+        button:hover { background: var(--blue); }
+        button:disabled { background: #ccc; }
+        .footer-link { text-align: center; margin-top: 20px; font-size: 13px; color: #666; }
+        .footer-link a { color: var(--red); text-decoration: none; font-weight: bold; }
+        #statusMsg { text-align: center; font-size: 13px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="logo"><span>LIVE</span> MARKET</div>
+    <h3>Criar Conta</h3>
+    
+    <form id="formCadastro">
+        <input type="text" id="nome" placeholder="Nome Completo" required>
+        <input type="text" id="social" placeholder="@ da Rede Social" required>
+        <input type="email" id="email" placeholder="E-mail" required>
+        <input type="password" id="senha" placeholder="Senha (mín. 6 dígitos)" required minlength="6">
+        <button type="submit" id="btnAcao">Cadastrar Agora</button>
+    </form>
+    
+    <div id="statusMsg"></div>
+    <div class="footer-link">Já tem conta? <a href="index.html">Login</a></div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+    const SB_URL = 'https://hqmxcqhvwlvyellolhkm.supabase.co'; 
+    const SB_KEY = 'sb_publishable_CvY0uDpQZDPSnQixxh7uSA_8cYwqumF';
+    const supabaseClient = supabase.createClient(SB_URL, SB_KEY);
+
+    const form = document.getElementById('formCadastro');
+    const btn = document.getElementById('btnAcao');
+    const statusMsg = document.getElementById('statusMsg');
+    const socialInp = document.getElementById('social');
+
+    // Garante que o @ esteja no início
+    socialInp.addEventListener('blur', () => {
+        let val = socialInp.value.trim();
+        if (val && !val.startsWith('@')) {
+            socialInp.value = '@' + val;
+        }
+    });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        btn.disabled = true;
+        btn.innerText = "PROCESSANDO...";
+        statusMsg.innerText = "";
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('senha').value;
+        const nome = document.getElementById('nome').value;
+        const social = socialInp.value;
+
+        try {
+            const { data, error } = await supabaseClient.auth.signUp({
+                email: email,
+                password: password,
+                options: {
+                    data: { 
+                        full_name: nome,
+                        user_social: social 
+                    }
+                }
+            });
+
+            if (error) throw error;
+
+            statusMsg.style.color = "green";
+            statusMsg.innerText = "Sucesso! Perfil criado.";
+            
+            setTimeout(() => { window.location.href = "index.html"; }, 2000);
+
+        } catch (error) {
+            statusMsg.style.color = "red";
+            statusMsg.innerText = "Erro: " + error.message;
+            btn.disabled = false;
+            btn.innerText = "CADASTRAR AGORA";
+        }
+    });
+</script>
+</body>
+</html>

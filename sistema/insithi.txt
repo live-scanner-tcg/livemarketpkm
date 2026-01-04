@@ -1,0 +1,38 @@
+-Você entra com a sorte, nós entramos com a tecnologia e a segurança. Seu patrimônio físico, gerido de forma digital.
+
+====== copy 1
+
+Gestão Digital com Lastro Físico: Suas Cartas na Palma da Mão
+Esqueça planilhas ou pesquisas manuais. No The Vault, o seu inventário é atualizado em tempo real com tecnologia de ponta.
+
+Inventário Automático: Cada carta aberta em Live ou adquirida em nosso Marketplace entra instantaneamente no seu perfil. Você não precisa cadastrar nada; o sistema faz tudo por você.
+
+Precificação Dinâmica: Suas cartas já aparecem com o preço de mercado atualizado via API. Você acompanha a valorização do seu patrimônio como se fosse uma carteira de investimentos.
+
+Acesso Online Total: Suas cartas estão protegidas fisicamente em nosso cofre no Japão, mas você tem acesso total a elas online. Visualize fotos em alta definição (macro) e gerencie seus ativos de qualquer lugar do mundo.
+
+Segurança e Liquidez: Enquanto cuidamos da preservação física (climatização e UV), você decide o momento certo de vender ou enviar para graduação com apenas um clique
+
+
+
+supabase login
+3012inc@gmail.com
+bet369@@
+
+db pass: Pokemonlivemarket30##
+Pokemonlive3012@@
+
+Project ID
+Reference used in APIs and URLs.
+
+Project URl
+https://hqmxcqhvwlvyellolhkm.supabase.co
+
+Pokelive30##
+d18f5a1e-b4db-49ad-841b-6809c5f0515c
+
+https://hqmxcqhvwlvyellolhkm.supabase.co
+sb_publishable_CvY0uDpQZDPSnQixxh7uSA_8cYwqumF
+
+google vison API
+AIzaSyAGiv9l75QyhNdfYQoVPMJUgRBZ4fNzWi0
